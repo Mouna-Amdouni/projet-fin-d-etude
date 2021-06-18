@@ -322,7 +322,7 @@ class PostController extends AbstractController
             $em->flush();
             $this->addFlash("success","Publication ajoutée ");
 //            return $this->redirectToRoute("post");
-            return $this->redirectToRoute("newpost");
+            return $this->redirectToRoute("mespublication");
 
         }
         return $this->render('publicationsU/newpub.html.twig', ['actualites'=>$actualiteRepository->findAll(),'form' => $form->createView(), 'form1' => $form1->createView()]);
