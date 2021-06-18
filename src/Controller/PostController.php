@@ -218,32 +218,34 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
 
-        dump($pub1);
+//        dump($pub1);
         $em = $this->getDoctrine()->getManager();
         if (($form1->isSubmitted())) {
 //            $files[] = $_FILES['files'];
 
 //            dd($a,$b);
-            $files [] = $request->files->all();
+//            $files [] = $request->files->all();
 //            dd($files);
             $pub1->setDatePub(new \DateTime('now'));
             $pub1->setUser($repository->find($this->getUser()->getId()));
             $em->persist($pub1);
-            foreach ($files as $key => $value) {
-                foreach ($value as $cle => $v) {
-//                    dd($v);
-                    foreach ($v as $c => $file) {
-//                        dd($file);
-                        $p = new Mutimedia();
-                        $filename = $file->getClientOriginalName();
-//                        dd($filename);
-                        $file->move($this->getParameter('images_directory'), $filename);
-                        $p->setSource($filename);
-                        $p->setPublication($pub1);
-                        $em->persist($p);
-                    }
-                }
-            }
+//            foreach ($files as $key => $value) {
+//                foreach ($value as $cle => $v) {
+////                    dd($v);
+//                    foreach ($v as $c => $file) {
+////                        dd($file);
+//                        $p = new Mutimedia();
+//                        $filename = $file->getClientOriginalName();
+////                        dd($filename);
+//                        $file->move($this->getParameter('images_directory'), $filename);
+//                        $p->setSource($filename);
+//                        $p->setPublication($pub1);
+//                        $em->persist($p);
+//                    }
+//                }
+//            }
+//            $p->setPublication($pub1);
+//            $em->persist($p);
             $em->flush();
             $this->addFlash('notice', 'Publication Resposted !');
             return $this->redirectToRoute("post");
