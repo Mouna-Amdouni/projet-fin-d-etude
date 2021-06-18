@@ -224,8 +224,8 @@ class PostController extends AbstractController
 //            $files[] = $_FILES['files'];
 
 //            dd($a,$b);
-//            $files [] = $request->files->all();
-//            dd($files);
+            $files [] = $request->files->all();
+            dd($files);
             $pub1->setDatePub(new \DateTime('now'));
             $pub1->setUser($repository->find($this->getUser()->getId()));
             $em->persist($pub1);
@@ -244,8 +244,6 @@ class PostController extends AbstractController
 //                    }
 //                }
 //            }
-//            $p->setPublication($pub1);
-//            $em->persist($p);
             $em->flush();
             $this->addFlash('notice', 'Publication Resposted !');
             return $this->redirectToRoute("post");
