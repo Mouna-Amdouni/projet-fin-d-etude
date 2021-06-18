@@ -291,7 +291,8 @@ class PostController extends AbstractController
         $form1->handleRequest($request);
 //        $form = $this->createForm(MultimediaType::class, $multimedia);
         $form=$this->createFormBuilder($multimedia)
-            ->add('source',FileType::class,['label'=>'Chargez votre image' ])->getForm();
+            ->add('source',FileType::class,['label'=>'Chargez votre image' ])
+            ->getForm();
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         if (($form1->isSubmitted() && $form->isSubmitted())) {
@@ -332,10 +333,10 @@ class PostController extends AbstractController
 //                    }
 //                }
 //            }
-            $multimedia->setSource($fileName);
-            $multimedia->setPublication($pub);
-            $em->persist($multimedia);
-            $em->flush();
+       $multimedia->setSource($fileName);
+       $multimedia->setPublication($pub);
+       $em->persist($multimedia);
+       $em->flush();
             $this->addFlash("success","Publication ajoutée ");
 //            return $this->redirectToRoute("post");
             return $this->redirectToRoute("newpost");
