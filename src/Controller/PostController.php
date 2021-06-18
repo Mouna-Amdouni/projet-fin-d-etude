@@ -282,7 +282,7 @@ class PostController extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function newpublication(Request $request, UserRepository $repository): Response
+    public function newpublication(ActualiteRepository $actualiteRepository,Request $request, UserRepository $repository): Response
     {
         $multimedia = new Mutimedia();
         $pub = new Publication();
@@ -322,10 +322,10 @@ class PostController extends AbstractController
             $em->flush();
             $this->addFlash("success","Publication ajoutée ");
 //            return $this->redirectToRoute("post");
-            return $this->redirectToRoute("mespublication");
+            return $this->redirectToRoute("newpost");
 
         }
-        return $this->render('publicationsU/newpub.html.twig', ['form' => $form->createView(), 'form1' => $form1->createView()]);
+        return $this->render('publicationsU/newpub.html.twig', ['actualites'=>$actualiteRepository->findAll(),'form' => $form->createView(), 'form1' => $form1->createView()]);
     }
 
     /**
