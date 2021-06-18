@@ -11,21 +11,7 @@
 
 
                 {{ form_start(form,{'attr':{'enctype':'multipart/form-data'}}) }}
-{#                <div class="col"  style="width: 400px;margin-left: 30px">#}
 
-{#                    {{ form_widget(form1.nom,{'attr':{'placeholder':  pub1.nom ,'class':'form-control','style':'widht:150px'}}) }}#}
-{#                </div>#}
-{#                <br>#}
-{#                <div class="col-xs-2" style="width: 100px;margin-top:-62px;margin-left:440px">#}
-
-{#                    {{ form_widget(form1.age,{'attr':{'placeholder': pub1.age ,'min':1,'max':100,'class':'form-control','id':'age','name':'age'}}) }}#}
-{#                </div>#}
-{#                <br>#}
-{#                <div class="form-check" style="margin-left:190px">#}
-{#                    <label class="form-check-label" for="exampleRadios1">#}
-{#                        {{ form_widget(form1.sexe,{'attr':{'placeholder':pub1.sexe,'class':'motif'}}) }}#}
-{#                    </label>#}
-{#                </div>#}
                 <br>
                 <!----------------------------------------------->
                 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -70,45 +56,43 @@
                 <div id="map" style="margin-left:10px"></div>
             </div>
             <br><br><br><br><br><br><br><br><br><br><br><br><br>
-            <div class="col">
-                <div style="margin-left: 80px">
-                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
-                        <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                        <small class="text-uppercase font-weight-bold text-muted">Choisir 4 photos</small>
-                        <br>
-                        <input type="file" name="files[]"  id="files" multiple="multiple" accept="image/jpg,image/png, image/jpeg" aria-valuemax="" />
-                    </label>
-                </div>
-                <div style="height: 20px;">
-                </div>
-            </div>
+{#            <div class="col">#}
+{#                <div style="margin-left: 80px">#}
+{#                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4">#}
+{#                        <i class="fa fa-cloud-upload mr-2 text-muted"></i>#}
+{#                        <small class="text-uppercase font-weight-bold text-muted">Choisir 4 photos</small>#}
+{#                        <br>#}
+{#                        <input type="file" name="files[]"  id="files" multiple="multiple" accept="image/jpg,image/png, image/jpeg" aria-valuemax="" />#}
+{#                    </label>#}
+{#                </div>#}
+{#                <div style="height: 20px;">#}
+{#                </div>#}
+{#            </div>#}
             <br>
             <a href="{{ path('newpost') }}" class="button button-a button-big button-rouded"  style="margin-left: 200px"><button type="submit" style="background-color: transparent;border: navajowhite;color: white">Repost</button> </a>
             {{ form_end(form1) }}
         </div>
-    </div>
 
-</div>
 <br>
 
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $("#files").on("change", function() {
-        if ($("#files")[0].files.length > 4) {
-            alert("You can select only 4 images");
-            $("#files").val([]);
-        }
-    });
-    var uploadField = document.getElementById("files");
 
-    uploadField.onchange = function() {
-        if(this.files[0].size > 307200){
-            alert("File is too big!");
-            this.value = "";
-        };
-    };
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{#<script>#}
+{#    $("#files").on("change", function() {#}
+{#        if ($("#files")[0].files.length > 4) {#}
+{#            alert("You can select only 4 images");#}
+{#            $("#files").val([]);#}
+{#        }#}
+{#    });#}
+{#    var uploadField = document.getElementById("files");#}
+
+{#    uploadField.onchange = function() {#}
+{#        if(this.files[0].size > 307200){#}
+{#            alert("File is too big!");#}
+{#            this.value = "";#}
+{#        };#}
+{#    };#}
+{#</script>#}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
