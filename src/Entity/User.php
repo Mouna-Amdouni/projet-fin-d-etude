@@ -89,15 +89,9 @@ class User implements UserInterface, EquatableInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity=BlogPost::class, mappedBy="author")
-     */
-    private $blogPosts;
 
-    /**
-     * @ORM\OneToMany(targetEntity=BlogPost::class, mappedBy="creator")
-     */
-    private $blogPostsCreated;
+
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -108,10 +102,7 @@ class User implements UserInterface, EquatableInterface
      */
     private $services;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Historique::class, mappedBy="user")
-     */
-    private $historiques;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Association::class, mappedBy="UserA")
@@ -215,9 +206,9 @@ class User implements UserInterface, EquatableInterface
     {
         $this->commentaires = new ArrayCollection();
         $this->publications = new ArrayCollection();
-        $this->blogPosts = new ArrayCollection();
-        $this->blogPostsCreated = new ArrayCollection();
-        $this->historiques = new ArrayCollection();
+
+
+
         $this->associations = new ArrayCollection();
         $this->topics = new ArrayCollection();
         $this->messages = new ArrayCollection();
@@ -377,68 +368,6 @@ class User implements UserInterface, EquatableInterface
         }*/
     }
 
-    /**
-     * @return Collection|BlogPost[]
-     */
-    public function getBlogPosts(): Collection
-    {
-        return $this->blogPosts;
-    }
-
-    public function addBlogPost(BlogPost $blogPost): self
-    {
-        if (!$this->blogPosts->contains($blogPost)) {
-            $this->blogPosts[] = $blogPost;
-            $blogPost->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBlogPost(BlogPost $blogPost): self
-    {
-        if ($this->blogPosts->contains($blogPost)) {
-            $this->blogPosts->removeElement($blogPost);
-            // set the owning side to null (unless already changed)
-            if ($blogPost->getAuthor() === $this) {
-                $blogPost->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|BlogPost[]
-     */
-    public function getBlogPostsCreated(): Collection
-    {
-        return $this->blogPostsCreated;
-    }
-
-    public function addBlogPostsCreated(BlogPost $blogPostsCreated): self
-    {
-        if (!$this->blogPostsCreated->contains($blogPostsCreated)) {
-            $this->blogPostsCreated[] = $blogPostsCreated;
-            $blogPostsCreated->setCreator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBlogPostsCreated(BlogPost $blogPostsCreated): self
-    {
-        if ($this->blogPostsCreated->contains($blogPostsCreated)) {
-            $this->blogPostsCreated->removeElement($blogPostsCreated);
-            // set the owning side to null (unless already changed)
-            if ($blogPostsCreated->getCreator() === $this) {
-                $blogPostsCreated->setCreator(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return "$this->nomComplet ($this->id)";
@@ -508,36 +437,6 @@ class User implements UserInterface, EquatableInterface
 //        return $this;
 //    }
 
-    /**
-     * @return Collection|Historique[]
-     */
-    public function getHistoriques(): Collection
-    {
-        return $this->historiques;
-    }
-
-    public function addHistorique(Historique $historique): self
-    {
-        if (!$this->historiques->contains($historique)) {
-            $this->historiques[] = $historique;
-            $historique->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHistorique(Historique $historique): self
-    {
-        if ($this->historiques->contains($historique)) {
-            $this->historiques->removeElement($historique);
-            // set the owning side to null (unless already changed)
-            if ($historique->getUser() === $this) {
-                $historique->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
 
     public function isEqualTo(UserInterface $user)

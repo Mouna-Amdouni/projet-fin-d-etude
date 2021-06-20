@@ -7,11 +7,11 @@
 	<div class="login_wrapper">
 		<div class="animate form login_form">
 			<section class="login_content">
-				<h1>An email has been sent that contains a link that you can click to reset your password. This link will expire in
+				<h1>Un e-mail a été envoyé qui contient un lien sur lequel vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien expirera dans
 					{{ tokenLifetime|date('g') }}
-					hour(s).</h1>
-				<h2>If you don't receive an emai please check your spam folder or
-					<a href="{{ path('app_forgot_password_request') }}">try again</a>.</h2>
+					heures.</h1>
+				<h2>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou
+					<a href="{{ path('app_forgot_password_request') }}">réessayer</a>.</h2>
 
 			</section>
 		</div>

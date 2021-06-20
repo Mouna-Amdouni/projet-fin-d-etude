@@ -7,7 +7,6 @@ use App\Repository\ActualiteRepository;
 use App\Repository\OpportuniteRepository;
 use App\Repository\ReglesRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 
 use App\Entity\Commentaire;
@@ -289,28 +288,15 @@ class PostController extends AbstractController
         $pub = new Publication();
         $form1 = $this->createForm(PublicationType::class, $pub);
         $form1->handleRequest($request);
-//        $form = $this->createForm(MultimediaType::class, $multimedia);
-        $form=$this->createFormBuilder($multimedia)
-            ->add('source',FileType::class,['label'=>'Chargez votre image' ])
-            ->getForm();
+        $form = $this->createForm(MultimediaType::class, $multimedia);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
-        if (($form1->isSubmitted() && $form->isSubmitted())) {
-            $file=$form->get('source')->getData();
-            $fileName=md5(uniqid()).'.'.$file->guessExtension();
-            try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
-            }
+        if (($form1->isSubmitted())) {
 //            $files[] = $_FILES['files'];
             $a = $request->request->get('markers1');
             $b = $request->request->get('markers2');
 //            dd($a,$b);
-//            $files [] = $request->files->all();
+            $files [] = $request->files->all();
             $pub->setIsValid(0);
             $pub->setIsResolved(0);
             $pub->setLongitude($a);
@@ -319,24 +305,21 @@ class PostController extends AbstractController
             $pub->setUser($repository->find($this->getUser()->getId()));
             $em->persist($pub);
             $em->flush();
-//            foreach ($files as $key => $value) {
-//                foreach ($value as $cle => $v) {
-//                    foreach ($v as $c => $file) {
-//                        $p = new Mutimedia();
-//                        $filename = $file->getClientOriginalName();
-////                        dd($filename);
-//                        $file->move($this->getParameter('images_directory'), $filename);
-//
-//                        $p->setPublication($pub);
-//                        $p->setSource($filename);
-//                        $em->persist($p);
-//                    }
-//                }
-//            }
-       $multimedia->setSource($fileName);
-       $multimedia->setPublication($pub);
-       $em->persist($multimedia);
-       $em->flush();
+            foreach ($files as $key => $value) {
+                foreach ($value as $cle => $v) {
+                    foreach ($v as $c => $file) {
+                        $p = new Mutimedia();
+                        $filename = $file->getClientOriginalName();
+//                        dd($filename);
+                        $file->move($this->getParameter('images_directory'), $filename);
+
+                        $p->setPublication($pub);
+                        $p->setSource($filename);
+                        $em->persist($p);
+                    }
+                }
+            }
+            $em->flush();
             $this->addFlash("success","Publication ajoutée ");
 //            return $this->redirectToRoute("post");
             return $this->redirectToRoute("newpost");
